@@ -13,10 +13,20 @@ public class PlayGame extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	private Handler handler;
+	private Menu menu;
+	
+	
+	public enum STATE{
+		Menu,
+		Game,
+	};
+	public STATE gameState = STATE.Menu;
 	
 	public PlayGame() {
-		new Window(WIDTH, HEIGHT, "Roll For Something", this);
 		handler = new Handler();
+		new Window(WIDTH, HEIGHT, "Roll For Something", this);
+		menu = new Menu();
+
 	}
 
 	public synchronized void start() {
@@ -65,6 +75,11 @@ public class PlayGame extends Canvas implements Runnable {
 	}
 	public void tick() {
 		handler.tick();
+		if(gameState ==STATE.Game) {
+			//Do stuff in game state
+		}else if(gameState==STATE.Menu) {
+			menu.tick();
+		}
 	}
 
 	private void render() {
@@ -78,6 +93,13 @@ public class PlayGame extends Canvas implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
+		if(gameState==STATE.Game) {
+			//do stuff in game State
+		}else if(gameState==STATE.Menu){
+			menu.render(g);
+		}
+		
+		
 		g.dispose();
 		bs.show();
 	}
