@@ -18,14 +18,18 @@ public class PlayGame extends Canvas implements Runnable {
 	
 	public enum STATE{
 		Menu,
+		Settings,
 		Game,
 	};
 	public STATE gameState = STATE.Menu;
 	
 	public PlayGame() {
 		handler = new Handler();
+		menu = new Menu(this, handler);
+		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Roll For Something", this);
-		menu = new Menu();
+		
+
 
 	}
 
@@ -95,7 +99,7 @@ public class PlayGame extends Canvas implements Runnable {
 		handler.render(g);
 		if(gameState==STATE.Game) {
 			//do stuff in game State
-		}else if(gameState==STATE.Menu){
+		}else if(gameState==STATE.Menu ||gameState==STATE.Settings ){
 			menu.render(g);
 		}
 		
