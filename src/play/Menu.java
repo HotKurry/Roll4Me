@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 import play.PlayGame.STATE;
 
@@ -12,26 +13,41 @@ public class Menu extends MouseAdapter {
 
 	private PlayGame game;
 	private Handler handler;
+	private int i1, i2, i3;
+	private User user;
 	
 	
-	public Menu(PlayGame game, Handler handler) {
+	public Menu(PlayGame game, Handler handler, User user) {
 		this.game = game;
 		this.handler = handler;
+		this.user = user;
 	}
 	
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
 		if(game.gameState==STATE.Menu) {
+		
 		//play Button
 		if(mouseOver(mx,my,440, 250, 400, 100)) {
 			game.gameState = STATE.Game;
+			Random r = new Random();
+			i1 = 1+ r.nextInt(9);
+
+			handler.addObject(new FactionTile(50,200,ID.faction,i1));
+			i2 = 1+ r.nextInt(9);
+			handler.addObject(new FactionTile(440,200,ID.faction,i2));
+			i3 = 1+ r.nextInt(9);
+			handler.addObject(new FactionTile(830,200,ID.faction,i3));
+			game.gameState = STATE.FactionSelect;
 		}
+		
 		//Settings Button
 		if(mouseOver(mx,my, 440, 450, 400, 100)) {
 
 			game.gameState = STATE.Settings;
 		}
+		
 		//Quit Button
 		if(mouseOver(mx,my,440, 650, 400, 100)) {
 			System.exit(1);
@@ -40,10 +56,22 @@ public class Menu extends MouseAdapter {
 			if(mouseOver(mx,my,80, 750, 200, 100)) {
 				game.gameState = STATE.Menu;
 			}
+		}else if(game.gameState==STATE.FactionSelect) {
+			if(mouseOver(mx,my,50, 200, 380, 600)) {
+				user.setFaction(new FactionTile(50,200,ID.faction,i1));
+				user.setDp(user.getFaction().points);
+				handler.clearObjects();
+			}else if(mouseOver(mx,my,440, 200, 380, 600)) {
+				user.setFaction(new FactionTile(50,200,ID.faction,i2));
+				user.setDp(user.getFaction().points);
+				handler.clearObjects();
+			}else if(mouseOver(mx,my,830, 200, 380, 600)) {
+				user.setFaction(new FactionTile(50,200,ID.faction,i3));
+				user.setDp(user.getFaction().points);
+				handler.clearObjects();
+			}
+			
 		}
-		
-		
-		
 	}
 	public void mouseReleased(MouseEvent e) {
 		

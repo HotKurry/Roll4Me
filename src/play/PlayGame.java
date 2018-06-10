@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 public class PlayGame extends Canvas implements Runnable {
 	
@@ -14,20 +15,24 @@ public class PlayGame extends Canvas implements Runnable {
 	private boolean running = false;
 	private Handler handler;
 	private Menu menu;
+	private User user;
 	
 	
 	public enum STATE{
 		Menu,
 		Settings,
 		Game,
+		FactionSelect,
 	};
 	public STATE gameState = STATE.Menu;
 	
 	public PlayGame() {
 		handler = new Handler();
-		menu = new Menu(this, handler);
+		user = new User(null, 0, 1, 0);
+		menu = new Menu(this, handler, user);
 		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Roll For Something", this);
+
 		
 
 
@@ -80,6 +85,7 @@ public class PlayGame extends Canvas implements Runnable {
 	public void tick() {
 		handler.tick();
 		if(gameState ==STATE.Game) {
+			user.tick();
 			//Do stuff in game state
 		}else if(gameState==STATE.Menu) {
 			menu.tick();
@@ -92,12 +98,15 @@ public class PlayGame extends Canvas implements Runnable {
 			this.createBufferStrategy(3);
 			return;
 		}
+		//black background
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
+
 		handler.render(g);
-		if(gameState==STATE.Game) {
+		if(gameState==STATE.Game || gameState==STATE.FactionSelect) {
+			user.render(g);
+
 			//do stuff in game State
 		}else if(gameState==STATE.Menu ||gameState==STATE.Settings ){
 			menu.render(g);

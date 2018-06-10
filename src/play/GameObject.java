@@ -34,7 +34,4 @@ public abstract class GameObject {
 		this.id = id;
 	}
 	
-	
-	
-	
 }
