@@ -3,12 +3,13 @@ package play;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class User {
 	public int[] dice;
 	private int vp, dp, cash;
 	public FactionTile faction;
-
+	public ArrayList<Tile> tiles;
 	
 	public User(int[] dice, int vp, int cash, int dp) {
 		super();
@@ -16,6 +17,7 @@ public class User {
 		this.dp = dp;
 		this.vp = vp;
 		this.cash = cash;
+		tiles = new ArrayList<Tile>();
 		if (dice==null) {
 			dice = new int[] {3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		}
@@ -55,7 +57,11 @@ public class User {
 		g.drawString(""+dp, 215, 50);
 		g.drawString("Cash:", 40, 90);
 		g.drawString(""+cash, 120, 90);
+		if(faction!=null) {
+		g.drawString(faction.p1.getInfo(), 100, 800);
+		g.fillOval(50, 800, 50, 50);
 		
+		}
 	}
 
 	public FactionTile getFaction() {
@@ -63,6 +69,7 @@ public class User {
 	}
 
 	public void setFaction(FactionTile faction) {
+		tiles.add(faction);
 		this.faction = faction;
 	}
 
@@ -72,6 +79,19 @@ public class User {
 
 	public void setDp(int dp) {
 		this.dp = dp;
+	}
+	public void AddPwr() {
+		Tile tempT= tiles.get(tiles.size()-1);
+		
+		
+	}
+	public void AddWrlds(){
+		
+		
+		
+	}
+	public void pwrCode() {
+		
 	}
 	
 	
