@@ -60,20 +60,20 @@ public class Menu extends MouseAdapter {
 			if(mouseOver(mx,my,50, 200, 380, 600)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i1));
 				user.setDp(user.getFaction().points);
-				//user.AddPwr();
 				//user.AddWorlds();
+				user.AddPwr();
 				handler.clearObjects();
 			}else if(mouseOver(mx,my,440, 200, 380, 600)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i2));
 				user.setDp(user.getFaction().points);
-				//user.AddPwr();
 				//user.AddWrlds();
+				user.AddPwr();
 				handler.clearObjects();
 			}else if(mouseOver(mx,my,830, 200, 380, 600)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i3));
 				user.setDp(user.getFaction().points);
-				//user.AddPwr();
 				//user.AddWrlds();
+				user.AddPwr();
 				handler.clearObjects();
 			}
 			

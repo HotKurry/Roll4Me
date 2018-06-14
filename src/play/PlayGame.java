@@ -27,6 +27,7 @@ public class PlayGame extends Canvas implements Runnable {
 	public STATE gameState = STATE.Menu;
 	
 	public PlayGame() {
+		
 		handler = new Handler();
 		user = new User(null, 0, 1, 0);
 		menu = new Menu(this, handler, user);
