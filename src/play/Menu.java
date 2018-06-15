@@ -36,8 +36,18 @@ public class Menu extends MouseAdapter {
 
 			handler.addObject(new FactionTile(50,200,ID.faction,i1));
 			i2 = 1+ r.nextInt(9);
+			if(i2==i1) {
+			while(i2==i1) {
+				i2 = 1+ r.nextInt(9);
+			}
+			}
 			handler.addObject(new FactionTile(440,200,ID.faction,i2));
 			i3 = 1+ r.nextInt(9);
+			if(i3==i1||i3==i2) {
+			while(i3==i1||i3==i2) {
+				i3 = 1+ r.nextInt(9);
+			}
+			}
 			handler.addObject(new FactionTile(830,200,ID.faction,i3));
 			game.gameState = STATE.FactionSelect;
 		}

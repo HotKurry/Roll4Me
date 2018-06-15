@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+
 public class User {
 	public int[] dice;
 	private int vp, dp, cash;
@@ -66,20 +67,29 @@ public class User {
 			if(j>=12) {
 				g.setColor(Color.yellow);
 			}else if(j>=10) {
-				g.setColor(Color.green);
+				//green
+				g.setColor(new Color(27, 94, 32));
 			}else if(j>=8) {
-				g.setColor(Color.orange);
+				g.setColor(new Color(62, 39, 35));
+				//brown
 			}else if(j>=6) {
-				g.setColor(Color.cyan);
+				//teal
+				g.setColor(new Color(128, 222, 234));
 			}else if(j>=4) {
-				g.setColor(Color.magenta);
+				//purple
+				g.setColor(new Color(49, 27, 146));
 			}else if(j>=2) {
-				g.setColor(Color.red);
+				//red
+				g.setColor(new Color(183, 28, 28));
 			}
 			
 			g.fillRect(700+shifter, 10, 50, 50);
 			g.fillRect(700+shifter, 80, 50, 50);
-			g.setColor(Color.black);
+			if(j<2  || j>11 || j==6) {			
+				g.setColor(Color.black);
+			}else {
+				g.setColor(Color.white);
+			}
 			g.drawString(""+dice[j], 715+shifter, 50);
 			g.drawString(""+dice[j+1], 715+shifter, 120);
 			
