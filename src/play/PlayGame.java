@@ -23,6 +23,7 @@ public class PlayGame extends Canvas implements Runnable {
 		Settings,
 		Game,
 		FactionSelect,
+		FirstWorld,
 	};
 	public STATE gameState = STATE.Menu;
 	
@@ -33,8 +34,6 @@ public class PlayGame extends Canvas implements Runnable {
 		menu = new Menu(this, handler, user);
 		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Roll For Something", this);
-
-		
 
 
 	}
@@ -105,7 +104,7 @@ public class PlayGame extends Canvas implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		handler.render(g);
-		if(gameState==STATE.Game || gameState==STATE.FactionSelect) {
+		if(gameState==STATE.Game || gameState==STATE.FactionSelect || gameState==STATE.FirstWorld) {
 			user.render(g);
 
 			//do stuff in game State

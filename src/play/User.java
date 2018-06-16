@@ -12,6 +12,8 @@ public class User {
 	public FactionTile faction;
 	public ArrayList<Tile> tiles;
 	public ArrayList<String> powList;
+	public ArrayList<Teams> teams;
+	
 	
 	public User(int[] dice, int vp, int cash, int dp) {
 		super();
@@ -19,6 +21,7 @@ public class User {
 		this.dp = dp;
 		this.vp = vp;
 		this.cash = cash;
+		teams = new ArrayList<Teams>();
 		tiles = new ArrayList<Tile>();
 		powList = new ArrayList<String>();
 
@@ -51,6 +54,9 @@ public class User {
 	public void render(Graphics g) {
 		Font fnt = new Font("arial", 1, 26);
 		Font fnt2 = new Font("arial", 1, 40);
+		Font fnt3 = new Font("arial", 1, 14);
+		
+		//DP, VP and cash tracking
 		g.setFont(fnt);
 		g.setColor(Color.white);
 		g.drawString("VP:", 40, 50);
@@ -61,6 +67,10 @@ public class User {
 		g.drawString(""+cash, 120, 90);
 		g.drawString("Devs", 620, 45);
 		g.drawString("Fans", 620, 115);
+		
+		
+		
+		//Dice Generator
 		int shifter = 0;
 		g.setFont(fnt2);
 		for(int j = 0; j<dice.length-3;j+=2) {
@@ -96,13 +106,33 @@ public class User {
 			shifter+=80;
 			
 		}
+		int slider = 0;
+		//World Generator
+		for(Teams t: teams) {
+			g.setColor(t.c);
+			g.fillOval(10+slider,850,50, 50);
+			if(t.die2!=null) {
+				g.setColor(t.die);
+				g.fillRect(12+slider, 820, 20, 20);
+				g.setColor(t.die2);
+				g.fillRect(42+slider, 820, 20, 20);
+			}else if(t.die!=null) {
+				g.setColor(t.die);
+				g.fillRect(25+slider, 820, 25, 25);
+				
+			}
+			slider+=70;
+		}
+		shifter = 0;
+		//PowerList
+		g.setColor(Color.white);
+		g.setFont(fnt3);
+		for(String s: powList) {
+			g.drawString(s, 10, 150+shifter);
+			shifter+=30;
+		}
 		
 		
-		
-		//if(faction!=null) {
-		//g.drawString(faction.p1.getInfo(), 100, 800);
-		//g.fillOval(50, 800, 50, 50);
-		//}
 	}
 
 	public FactionTile getFaction() {
@@ -138,13 +168,31 @@ public class User {
 		
 	}
 	public void AddWrlds(){
-		
+		Tile tempT= tiles.get(tiles.size()-1);
+		if(tempT.c!=null && !tempT.c.equals(Color.white)) {
+			teams.add(new Teams(tempT.c,0));
+		}
 		
 	}
 	public void pwrCode(Power p) {
 		int i = p.getId();
 		if(i<14) {
 			dice[i]+=1;
+		}else if(i==14) {
+			//red
+			teams.get(teams.size()-1).setDie(new Color(183, 28, 28));
+		}else if(i==15) {
+			//cyan
+			teams.get(teams.size()-1).setDie(new Color(128, 222, 234));
+		}else if(i==16) {
+			//brown
+			teams.get(teams.size()-1).setDie(new Color(62, 39, 35));
+		}else if(i==17) {
+			//green
+			teams.get(teams.size()-1).setDie(new Color(27, 94, 32));
+		}else if(i==18) {
+			//yellow
+			teams.get(teams.size()-1).setDie(Color.yellow);
 		}else if(i ==19) {
 			cash +=1;
 		}else if(i==20) {
