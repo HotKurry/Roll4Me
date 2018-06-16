@@ -34,21 +34,21 @@ public class Menu extends MouseAdapter {
 			Random r = new Random();
 			i1 = 1+ r.nextInt(9);
 
-			handler.addObject(new FactionTile(50,200,ID.faction,i1));
+			handler.addObject(new FactionTile(50,150,ID.faction,i1));
 			i2 = 1+ r.nextInt(9);
 			if(i2==i1) {
 			while(i2==i1) {
 				i2 = 1+ r.nextInt(9);
 			}
 			}
-			handler.addObject(new FactionTile(440,200,ID.faction,i2));
+			handler.addObject(new FactionTile(50,400,ID.faction,i2));
 			i3 = 1+ r.nextInt(9);
 			if(i3==i1||i3==i2) {
 			while(i3==i1||i3==i2) {
 				i3 = 1+ r.nextInt(9);
 			}
 			}
-			handler.addObject(new FactionTile(830,200,ID.faction,i3));
+			handler.addObject(new FactionTile(50,650,ID.faction,i3));
 			game.gameState = STATE.FactionSelect;
 		}
 		
@@ -67,24 +67,27 @@ public class Menu extends MouseAdapter {
 				game.gameState = STATE.Menu;
 			}
 		}else if(game.gameState==STATE.FactionSelect) {
-			if(mouseOver(mx,my,50, 200, 380, 600)) {
+			if(mouseOver(mx,my,50, 150, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i1));
 				user.setDp(user.getFaction().points);
-				//user.AddWorlds();
+				user.AddWrlds();
 				user.AddPwr();
 				handler.clearObjects();
-			}else if(mouseOver(mx,my,440, 200, 380, 600)) {
+				game.gameState = STATE.FirstWorld;
+			}else if(mouseOver(mx,my,50, 400, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i2));
 				user.setDp(user.getFaction().points);
-				//user.AddWrlds();
+				user.AddWrlds();
 				user.AddPwr();
 				handler.clearObjects();
-			}else if(mouseOver(mx,my,830, 200, 380, 600)) {
+				game.gameState = STATE.FirstWorld;
+			}else if(mouseOver(mx,my,50, 650, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i3));
 				user.setDp(user.getFaction().points);
-				//user.AddWrlds();
+				user.AddWrlds();
 				user.AddPwr();
 				handler.clearObjects();
+				game.gameState = STATE.FirstWorld;
 			}
 			
 		}
