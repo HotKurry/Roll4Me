@@ -143,6 +143,9 @@ public class User {
 		tiles.add(faction);
 		this.faction = faction;
 	}
+	public void addTile(Tile tile) {
+		tiles.add(tile);
+	}
 
 	public int getDp() {
 		return dp;
@@ -151,6 +154,8 @@ public class User {
 	public void setDp(int dp) {
 		this.dp = dp;
 	}
+	
+	
 	public void AddPwr() {
 		Tile tempT= tiles.get(tiles.size()-1);
 		pwrCode(tempT.p1);
@@ -169,6 +174,7 @@ public class User {
 	}
 	public void AddWrlds(){
 		Tile tempT= tiles.get(tiles.size()-1);
+		dp += tempT.points;
 		if(tempT.c!=null && !tempT.c.equals(Color.white)) {
 			teams.add(new Teams(tempT.c,0));
 		}
