@@ -26,12 +26,13 @@ public class Menu extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
+		Random r = new Random();
+
 		if(game.gameState==STATE.Menu) {
 		
 		//play Button
 		if(mouseOver(mx,my,440, 250, 400, 100)) {
 			game.gameState = STATE.Game;
-			Random r = new Random();
 			i1 = 1+ r.nextInt(9);
 
 			handler.addObject(new FactionTile(50,150,ID.faction,i1));
@@ -62,36 +63,80 @@ public class Menu extends MouseAdapter {
 		if(mouseOver(mx,my,440, 650, 400, 100)) {
 			System.exit(1);
 		}
+		
+		
+		
 		}else if(game.gameState==STATE.Settings) {
 			if(mouseOver(mx,my,80, 750, 200, 100)) {
 				game.gameState = STATE.Menu;
 			}
 		}else if(game.gameState==STATE.FactionSelect) {
+			boolean piked = false;
 			if(mouseOver(mx,my,50, 150, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i1));
-				user.setDp(user.getFaction().points);
-				user.AddWrlds();
-				user.AddPwr();
-				handler.clearObjects();
-				game.gameState = STATE.FirstWorld;
+				piked= true;
+				
+				
 			}else if(mouseOver(mx,my,50, 400, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i2));
-				user.setDp(user.getFaction().points);
-				user.AddWrlds();
-				user.AddPwr();
-				handler.clearObjects();
-				game.gameState = STATE.FirstWorld;
+				piked= true;
+				
 			}else if(mouseOver(mx,my,50, 650, 1170, 200)) {
 				user.setFaction(new FactionTile(50,200,ID.faction,i3));
-				user.setDp(user.getFaction().points);
+				piked= true;
+				
+			}
+			if(piked==true) {
 				user.AddWrlds();
 				user.AddPwr();
 				handler.clearObjects();
-				game.gameState = STATE.FirstWorld;
+				i1 = r.nextInt(8);
+				handler.addObject(new StartingWorld(600,150,ID.faction,i1));
+				i2 = r.nextInt(8);
+				if(i2==i1) {
+					while(i2==i1) {
+						i2 = r.nextInt(8);
+						}
+				}
+				handler.addObject(new StartingWorld(600,400,ID.faction,i2));
+				i3 = r.nextInt(8);
+				if(i3==i1||i3==i2) {
+					while(i3==i1||i3==i2) {
+						i3 = r.nextInt(8);
+					}
+				}
+				handler.addObject(new StartingWorld(600,650,ID.faction,i3));
+				game.gameState=STATE.FirstWorld;
+				
 			}
 			
+		}else if(game.gameState==STATE.FirstWorld) {
+			boolean piked = false;
+			if(mouseOver(mx,my,600, 150, 1170, 200)) {
+				user.addTile(new StartingWorld(50,200,ID.faction,i1));
+				piked= true;
+				
+			}else if(mouseOver(mx,my,600, 400, 650, 200)) {				
+				user.addTile(new StartingWorld(50,200,ID.faction,i2));
+				piked= true;
+				
+			}else if(mouseOver(mx,my,600, 650, 650, 200)) {
+				user.addTile(new StartingWorld(50,200,ID.faction,i3));
+				piked= true;
+			}
+			if(piked==true) {
+				
+				user.AddWrlds();
+				user.AddPwr();
+				handler.clearObjects();
+			}
 		}
 	}
+	
+	
+	
+	
+	
 	public void mouseReleased(MouseEvent e) {
 		
 	}

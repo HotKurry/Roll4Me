@@ -24,6 +24,7 @@ public class PlayGame extends Canvas implements Runnable {
 		Game,
 		FactionSelect,
 		FirstWorld,
+		StarTiles,
 	};
 	public STATE gameState = STATE.Menu;
 	
