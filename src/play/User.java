@@ -83,7 +83,7 @@ public class User {
 				g.setColor(new Color(62, 39, 35));
 				//brown
 			}else if(j>=6) {
-				//teal
+				//blue
 				g.setColor(new Color(128, 222, 234));
 			}else if(j>=4) {
 				//purple

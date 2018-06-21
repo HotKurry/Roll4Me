@@ -7,62 +7,11 @@ import java.awt.Graphics;
 public class StartingWorld extends Tile {
 
 	public StartingWorld(int x, int y, ID id, int ID) {
-		super(x, y, id);
-		this.ID=ID;
-		getSTATS(ID);
+		super(x, y, id, ID);
+
 		
 	}
-	private void getSTATS(int numb) {
-		if(numb==0) {
-			c = Color.yellow;
-			points = 1;
-			p1 = new Power(13);
 
-			return;
-		}else if(numb==1) {
-			c = new Color(62, 39, 35);
-			points = 1;
-			p1 = new Power(16);
-
-		}else if(numb==2) {
-			c= Color.white;
-			points = 2;
-			p1 = new Power(2);
-
-		}else if(numb==3) {
-			c= Color.white;
-			points = 0;
-			p1 = new Power(20);
-
-		}else if(numb==4) {
-			c= Color.white;
-			points = 3;
-			p1 = new Power(5);
-
-		}else if(numb==5) {
-			c = new Color(128, 222, 234);
-			points = 2;
-			p1 = new Power(15);
-
-		}else if(numb==6) {
-			c = new Color(27, 94, 32);
-			points = 0;
-			p1 = new Power(17);
-
-		}else if(numb==7) {
-			c = Color.white;
-			points = 2;
-			p1 = new Power(3);
-			p2 = new Power(7);
-		}else if(numb==8) {
-			c= Color.white;
-			points = 2;
-			p1 = new Power(3);
-			p2 = new Power(3);
-			
-		}
-	}
-	
 	public void tick() {
 		
 	}
