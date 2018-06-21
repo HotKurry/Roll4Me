@@ -3,23 +3,18 @@ package play;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.text.*;
 
-import javax.swing.*;
-import javax.swing.JPanel;
 
 public class FactionTile extends Tile {
 
 
 	public FactionTile(int x, int y, play.ID id, int ID) {
-		super(x, y, id);
-		this.ID =ID;
-		getSTATS(ID);
+		super(x, y, id, ID);
+
 
 	}
 
-	private void getSTATS(int numb) {
+	protected void getSTATS(int numb) {
 		if(numb==1) {
 			c = Color.white;
 			points = 2;
